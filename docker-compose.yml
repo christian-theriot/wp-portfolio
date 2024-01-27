@@ -4,8 +4,10 @@ services:
   db:
     image: mariadb:latest
     volumes:
-      - db_data:/backup
+      - ./db:/backup
     restart: always
+    networks:
+      - public
     environment:
       MARIADB_ROOT_PASSWORD: password
       MARIADB_DATABASE: wordpress
@@ -17,9 +19,11 @@ services:
       - db
     image: wordpress:latest
     volumes:
-      - .:/var/www/html
+      - ./src:/var/www/html
     ports:
-      - "8000:80"
+      - "8080:80"
+    networks:
+      - public
     restart: always
     environment:
       WORDPRESS_DB_HOST: db
@@ -27,5 +31,6 @@ services:
       WORDPRESS_DB_PASSWORD: wordpress
       WORDPRESS_DB_NAME: wordpress
 
-volumes:
-  db_data: {}
+networks:
+  public:
+    driver: bridge
