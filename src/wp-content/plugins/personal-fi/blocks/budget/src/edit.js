@@ -4,6 +4,7 @@
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
  */
 import { __ } from '@wordpress/i18n';
+import { Budget } from './budget';
 
 /**
  * React hook that is used to mark the block wrapper element.
@@ -11,7 +12,8 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { TextControl } from '@wordpress/components';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -29,10 +31,17 @@ import './editor.scss';
  *
  * @return {Element} Element to render.
  */
-export default function Edit() {
+export default function Edit({attributes, setAttributes}) {
+    console.log(JSON.stringify(attributes));
+
+    const blockProps = useBlockProps();
+    const budget = new Budget({attributes, setAttributes});
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __( 'Budget – hello from the editor!', 'budget' ) }
-		</p>
+        <>
+            <div {...blockProps}>
+                {budget.edit()}
+            </div>
+        </>
 	);
 }

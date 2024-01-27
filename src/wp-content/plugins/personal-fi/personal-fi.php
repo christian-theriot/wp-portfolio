@@ -22,3 +22,5 @@ class BlockLibrary {
         register_block_type(__DIR__ . '/blocks/budget/build');
     }
 }
+
+new BlockLibrary();
