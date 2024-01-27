@@ -25,6 +25,8 @@ wp-config.php
 
 # Example plugin
 /wp-content/plugins/hello.php
+/wp-content/plugins/*/build
+/wp-content/plugins/*/node_modules
 
 # Uploads
 /wp-content/uploads/
