@@ -13,11 +13,13 @@ class Budget {
      * }
      */
     constructor({attributes, setAttributes}) {
+        // propagate the setAttributes method from the editor
         this.setAttributes = setAttributes;
 
         if (attributes?.context?.rows?.length >= 0) {
             this.rows = attributes.context.rows;
         } else {
+            // only do this if attributes is undefined (first run)
             this.rows = [];
             this.setAttributes({
                 context: {
@@ -27,6 +29,10 @@ class Budget {
         }
     }
 
+    /**
+     * Add a new row to the context. Uses today's date,
+     * corrected for your time zone by default.
+     */
     _addRow() {
         let date = new Date();
         const offset = date.getTimezoneOffset();
@@ -44,9 +50,14 @@ class Budget {
         });
     }
 
+    /**
+     * Removes the selected row from the context
+     * 
+     * @param idx The index of the row to remove, 0-based
+     */
     _removeRow(idx) {
         if ( 0 > idx || idx >= this.rows.length) {
-            console.error('Prevented attempt to access ', idx, ' out of an ', this.rows.length, ' array');
+            console.error('Prevented attempt to access ', idx, ' out of an array of size ', this.rows.length);
             return;
         }
 
@@ -58,6 +69,13 @@ class Budget {
         });
     }
 
+    /**
+     * Update the selected row in the content
+     * 
+     * @param idx The index of the row to update, 0-based
+     * @param property The name of the property to update
+     * @param value The value to set for the property
+     */
     _updateRow(idx, property, value) {
         this.rows[idx][property] = value;
         this.setAttributes({
@@ -67,6 +85,12 @@ class Budget {
         });
     }
 
+    /**
+     * Render the selected row, returning the JSX representation.
+     * There will be 3 controls in the row, followed by a button that will remove this row
+     * 
+     * @param idx The index of the row to render
+     */
     _editRow(idx) {
         return <tr>
             <td>
@@ -96,7 +120,11 @@ class Budget {
         </tr>;
     }
 
+    /**
+     * Return the fully rendered markup of the rows context
+     */
     edit() {
+        // convert the rows context into an array of rendered markup
         const editRows = [];
 
         for (let i = 0; i < this.rows.length; i++) {

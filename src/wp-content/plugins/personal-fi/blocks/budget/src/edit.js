@@ -12,8 +12,7 @@ import { Budget } from './budget';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { TextControl } from '@wordpress/components';
+import { useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -32,8 +31,6 @@ import './editor.scss';
  * @return {Element} Element to render.
  */
 export default function Edit({attributes, setAttributes}) {
-    console.log(JSON.stringify(attributes));
-
     const blockProps = useBlockProps();
     const budget = new Budget({attributes, setAttributes});
 
