@@ -20,6 +20,9 @@
 # Configuration
 wp-config.php
 
+# Blocks
+**/build
+
 # Example themes
 /wp-content/themes/twenty*/
 

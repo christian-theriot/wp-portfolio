@@ -11,8 +11,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
  */
-import { useBlockProps, InspectorControls, InnerBlocks } from '@wordpress/block-editor';
-import { PanelBody } from '@wordpress/components';
+import { useBlockProps } from '@wordpress/block-editor';
 
 /**
  * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
@@ -22,8 +21,6 @@ import { PanelBody } from '@wordpress/components';
  */
 import './editor.scss';
 
-import  { Accounts } from '../../../js/editor/accounts';
-
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
@@ -32,27 +29,10 @@ import  { Accounts } from '../../../js/editor/accounts';
  *
  * @return {Element} Element to render.
  */
-export default function Edit({attributes, setAttributes}) {
-    const accounts = new Accounts({attributes, setAttributes});
-
-    return (
-        <>
-            <div {...useBlockProps()}>
-                <InspectorControls>
-                    <PanelBody title={__('Accounts')} initialOpen={true}>
-                        {accounts.edit()}
-                    </PanelBody>
-                    <PanelBody title={__('Transactions')} initialOpen={true}>
-
-                    </PanelBody>
-                </InspectorControls>
-                <InnerBlocks
-                    templateLock="all"
-                    template={[
-                        ['personal-fi/accounts', {}]
-                    ]}
-                />
-            </div>
-        </>
+export default function Edit() {
+	return (
+		<p { ...useBlockProps() }>
+			{ __( 'Accounts – hello from the editor!', 'accounts' ) }
+		</p>
 	);
 }

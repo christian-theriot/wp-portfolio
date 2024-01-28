@@ -26,18 +26,7 @@ import metadata from './block.json';
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 registerBlockType( metadata.name, {
-    attributes: {
-        accounts: {
-            type: "array"
-        },
-        transactions: {
-            type: "array"
-        }
-    },
-    providesContext: {
-        'personal-fi/accounts': 'accounts',
-        'personal-fi/transactions': 'transactions'
-    },
+    usesContext: ['personal-fi/accounts'],
 	/**
 	 * @see ./edit.js
 	 */
