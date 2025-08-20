@@ -16,9 +16,9 @@ jobs:
       - name: Setup SSH Key
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts
-          echo "${{ secrets.EXTERNAL_HOST }}" >> ~/.ssh/known_hosts
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.EXTERNAL_HOST }}" >> ~/.ssh/known_hosts
 
       - name: Push to repo
         run: |
