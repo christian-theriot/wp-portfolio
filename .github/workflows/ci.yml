@@ -22,3 +22,4 @@ jobs:
           ssh_key: ${{ secrets.PANTHEON_SSH_KEY }}
           machine_token: ${{ secrets.PANTHEON_MACHINE_TOKEN }}
           site: ${{ secrets.PANTHEON_SITE }}
+          target_env: dev
