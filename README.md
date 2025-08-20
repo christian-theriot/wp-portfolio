@@ -1,4 +1,14 @@
-# WordPress
+# WP Portfolio
+
+This repo contains themes, plugins, and blocks I will use to learn WordPress development, as well as solving interesting problems in managing content at scale
+
+Goals/Project Ideas:
+- Headless CMS in WP
+- GraphQL API
+- Vue Frontend App
+- React Native Mobile App
+
+---
 
 This is a WordPress repository configured to run on the [Pantheon platform](https://pantheon.io).
 
@@ -14,21 +24,15 @@ If you do not yet have a Pantheon account, you can create one for free. Once you
 
 When the spin-up process is complete, you will be redirected to the site's dashboard. Click on the link under the site's name to access the Dev environment.
 
-![alt](http://i.imgur.com/2wjCj9j.png?1, '')
-
 ### 3. Run the WordPress installer
 
 How about the WordPress database config screen? No need to worry about database connection information as that is taken care of in the background. The only step that you need to complete is the site information and the installation process will be complete.
 
 We will post more information about how this works but we recommend developers take a look at `wp-config.php` to get an understanding.
 
-![alt](http://i.imgur.com/4EOcqYN.png, '')
-
 If you would like to keep a separate set of configuration for local development, you can use a file called `wp-config-local.php`, which is already in our .gitignore file.
 
 ### 4. Enjoy!
-
-![alt](http://i.imgur.com/fzIeQBP.png, '')
 
 ## Branches
 
