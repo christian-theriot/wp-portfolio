@@ -1,0 +1,27 @@
+on:
+  push:
+    branches:
+      - 'release/*'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-to-pantheon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+  
+      - name: Setup SSH Key
+        run: |
+          ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts
+          echo "${{ secrets.EXTERNAL_HOST }}" >> ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+
+      - name: Push to repo
+        run: |
+          git remote add external "${{ secrets.EXTERNAL_REMOTE }}"
+          git checkout master
+          git merge ${{ github.head_ref || github.ref_name }}
+          git push external master
