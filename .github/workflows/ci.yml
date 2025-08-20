@@ -19,6 +19,8 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           echo "${{ secrets.EXTERNAL_HOST }}" >> ~/.ssh/known_hosts
+          eval $(ssh-agent)
+          ssh-add - <<< "${{ secrets.SSH_KEY }}"
 
       - name: Push to repo
         run: |
