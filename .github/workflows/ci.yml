@@ -23,6 +23,7 @@ jobs:
       - name: Push to repo
         run: |
           git remote add external "${{ secrets.EXTERNAL_REMOTE }}"
+          git fetch external
           git checkout -b master external/master
           git merge ${{ github.head_ref || github.ref_name }}
           git push external master
