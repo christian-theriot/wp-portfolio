@@ -9,23 +9,16 @@ concurrency:
 
 jobs:
   deploy-to-pantheon:
+    permissions:
+      deployments: write
+      contents: read
+      pull-requests: read
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-  
-      - name: Setup SSH Key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          echo "${{ secrets.EXTERNAL_HOST }}" >> ~/.ssh/known_hosts
-          eval $(ssh-agent)
-          ssh-add - <<< "${{ secrets.SSH_KEY }}"
-
-      - name: Push to repo
-        run: |
-          git remote add external "${{ secrets.EXTERNAL_REMOTE }}"
-          git fetch external
-          git checkout -b master external/master
-          git merge ${{ github.head_ref || github.ref_name }}
-          git push external master
+      - uses: actions/checkout@v4  
+      - uses: pantheon-systems/push-to-pantheon@0.7.0
+        name: Push to Pantheon
+        with:
+          ssh_key: ${{ secrets.PANTHEON_SSH_KEY }}
+          machine_token: ${{ secrets.PANTHEON_MACHINE_TOKEN }}
+          site: ${{ secrets.PANTHEON_SITE }}
