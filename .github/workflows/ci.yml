@@ -16,6 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4  
+      - name: Move WP files into working directory
+        run: |
+          mv wordpress/* .
+          mv .gitignore.pantheon .gitignore
       - uses: pantheon-systems/push-to-pantheon@0.7.0
         name: Push to Pantheon
         with:
