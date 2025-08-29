@@ -40,6 +40,8 @@ pantheon.upstream.yml
 ######################
 *.log
 *.sql
+.env
+nginx
 
 # OS generated files #
 ######################
