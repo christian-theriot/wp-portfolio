@@ -25,7 +25,7 @@ services:
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=wordpress
     volumes:
-      - wordpress:/var/www/html
+      - ./wordpress:/var/www/html
     networks:
       - localhost
 
@@ -39,13 +39,12 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - wordpress:/var/www/html
+      - ./wordpress:/var/www/html
       - ./nginx:/etc/nginx/conf.d
     networks:
       - localhost
 
 volumes:
-  wordpress:
   data:
 
 
