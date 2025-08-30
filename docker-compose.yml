@@ -1,0 +1,53 @@
+# Localhost Development Server
+services:
+  database:
+    image: mysql:latest
+    container_name: database
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MYSQL_DATABASE=wordpress
+    volumes:
+      - data:/var/lib/mysql
+    networks:
+      - localhost
+
+  wordpress:
+    depends_on:
+      - database
+    image: wordpress:6.8-fpm-alpine
+    container_name: wordpress
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - WORDPRESS_DB_HOST=database:3306
+      - WORDPRESS_DB_USER=$MYSQL_USER
+      - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
+      - WORDPRESS_DB_NAME=wordpress
+    volumes:
+      - .:/var/www/html
+    networks:
+      - localhost
+
+  webserver:
+    depends_on:
+      - wordpress
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - .:/var/www/html
+      - ./nginx:/etc/nginx/conf.d
+    networks:
+      - localhost
+
+volumes:
+  data:
+
+
+networks:
+  localhost:
+    driver: bridge
