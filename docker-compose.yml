@@ -15,7 +15,7 @@ services:
   wordpress:
     depends_on:
       - database
-    image: wordpress:6.8-fpm-alpine
+    build: .
     container_name: wordpress
     restart: unless-stopped
     env_file: .env
@@ -24,6 +24,8 @@ services:
       - WORDPRESS_DB_USER=$MYSQL_USER
       - WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD
       - WORDPRESS_DB_NAME=wordpress
+    ports:
+      - "9003:9003"
     volumes:
       - .:/var/www/html
     networks:
