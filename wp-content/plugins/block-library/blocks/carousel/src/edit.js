@@ -1,13 +1,28 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InnerBlocks, RichText } from '@wordpress/block-editor';
-import { useState } from 'react';
-import { Button } from '@wordpress/components';
+import { useBlockProps, InnerBlocks, RichText, InspectorControls, store } from '@wordpress/block-editor';
+import { Button, PanelBody, __experimentalNumberControl as NumberControl } from '@wordpress/components';
+import { useSelect } from '@wordpress/data'
 import './editor.scss';
+import { useState } from 'react';
 
-export default function Edit({ attributes, setAttributes }) {
-    const [editingBody, setEditingBody] = useState(false);
+export default function Edit({ attributes, setAttributes, clientId }) {
+
+    const MAX_NUM_CARDS = 6;
+    const innerBlocks = useSelect(select => select(store).getBlock(clientId).innerBlocks);
 
     return <>
+        <InspectorControls>
+            <PanelBody title={__('Settings', 'carousel')}>
+                <NumberControl
+                    label="Number of Cards"
+                    help="Control the maximum number of cards displayed in the carousel"
+                    min={1}
+                    max={MAX_NUM_CARDS}
+                    value={attributes._settings_num_cards}
+                    onChange={value => setAttributes({ _settings_num_cards: parseInt(value) })}
+                />
+            </PanelBody>
+        </InspectorControls>
         <div {...useBlockProps()}>
             <RichText
                 tagName='h3'
@@ -16,10 +31,8 @@ export default function Edit({ attributes, setAttributes }) {
                 onChange={content => setAttributes({ body: content })}
                 placeholder={__('Carousel Content')}
             />
-            <div class="slider">
-                <Button variant='secondary' className='prev-arrow' onClick={() => console.log('edit prev')}>&lt;</Button>
-                <InnerBlocks />
-                <Button variant='secondary' className='next-arrow' onClick={() => console.log('edit next')}>&gt;</Button>
+            <div className={"slider"}>
+                <InnerBlocks orientation='horizontal' />
             </div>
         </div>
     </>

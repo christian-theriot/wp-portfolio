@@ -11,6 +11,16 @@
     "supports": {
         "html": false
     },
+    "attributes": {
+        "_settings_num_cards": {
+            "type": "number",
+            "default": 3
+        },
+        "body": {
+            "type": "string",
+            "default": ""
+        }
+    },
     "allowedBlocks": [
         "block-library/carousel-card"
     ],
