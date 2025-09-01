@@ -1,0 +1,23 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "block-library/carousel-card",
+    "version": "1.0.0",
+    "title": "Carousel Card",
+    "category": "widgets",
+    "icon": "smiley",
+    "description": "Carousel card to render data in a slider",
+    "example": {},
+    "supports": {
+        "html": false
+    },
+    "parent": [
+        "block-library/carousel"
+    ],
+    "textdomain": "carousel-card",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css",
+    "render": "file:./render.php",
+    "viewScript": "file:./view.js"
+}

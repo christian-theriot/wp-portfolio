@@ -1,0 +1,1 @@
+console.log('Hello world from view.js (card)');
