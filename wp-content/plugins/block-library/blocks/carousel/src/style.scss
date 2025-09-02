@@ -1,1 +1,38 @@
-.wp-block-block-library-carousel {}
+.wp-block-block-library-carousel {
+    .slider {
+        display: flex;
+        width: 100%;
+
+        .dashicons {
+            padding-top: 10rem;
+            padding-bottom: 10rem;
+            cursor: pointer;
+
+            &.hidden {
+                visibility: hidden;
+                max-height: 0;
+            }
+
+            &.dashicons-arrow-left-alt2 {
+                position: absolute;
+                left: 1vw;
+            }
+
+            &.dashicons-arrow-right-alt2 {
+                position: absolute;
+                right: 1vw;
+            }
+        }
+
+        &[data-num-cards="3"] {
+
+            .wp-block-block-library-carousel-card.selected {
+                position: absolute;
+            }
+        }
+
+        :not(:first-child) {
+            margin-left: 1rem;
+        }
+    }
+}

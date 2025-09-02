@@ -1,4 +1,18 @@
 .wp-block-block-library-carousel-card {
-    width: 20rem;
-    border-radius: 5px;
+    &:not(.selected) {
+        visibility: hidden;
+        max-height: 0;
+    }
+
+    .card {
+        overflow: hidden;
+        border-radius: 0.75rem;
+        padding: 1rem;
+
+        &-header {
+            .hero {
+                margin: -1rem -1rem 0 -1rem;
+            }
+        }
+    }
 }

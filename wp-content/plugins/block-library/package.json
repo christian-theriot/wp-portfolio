@@ -4,10 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./scripts/compile.sh"
+    "start": "./scripts/compile.sh",
+    "watch": "nodemon -w blocks/carousel/src -w blocks/carousel-card/src -e js,php,json,scss --exec \"npm start\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }

@@ -1,7 +1,32 @@
 .wp-block-block-library-carousel-card {
     border: 1px dotted #f00;
+    width: 15rem;
+    border-radius: 5px;
 
     .components-card__header {
         display: block;
+
+        &.with-preview {
+            padding: 0;
+
+            h3 {
+                padding: 16px 24px;
+            }
+        }
+    }
+
+    .carousel-card__preview {
+        overflow: hidden;
+        display: flex;
+        width: 100%;
+        border-radius: 5px 5px 0 0;
+
+        img {
+            max-width: inherit;
+            max-height: inherit;
+            width: inherit;
+            height: inherit;
+            object-fit: none;
+        }
     }
 }

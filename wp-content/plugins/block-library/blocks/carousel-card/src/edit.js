@@ -1,6 +1,20 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls, store, MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
-import { Card, CardHeader, CardBody, __experimentalText as Text, __experimentalHeading as Heading, PanelBody, Button, ResponsiveWrapper } from '@wordpress/components';
+import {
+    useBlockProps,
+    InspectorControls,
+    MediaUpload,
+    MediaUploadCheck,
+    RichText
+} from '@wordpress/block-editor';
+import {
+    Card,
+    CardHeader,
+    CardBody,
+    PanelBody,
+    Button,
+    ResponsiveWrapper,
+    CheckboxControl
+} from '@wordpress/components';
 import { withSelect } from '@wordpress/data'
 import './editor.scss';
 
@@ -82,22 +96,38 @@ function _Edit({ attributes, setAttributes, media }) {
                             </MediaUploadCheck>
                         }
                     </div>
+                    <CheckboxControl
+                        label="Debug"
+                        help="Enable this to printout data related to this block"
+                        checked={attributes._settings_debug}
+                        onChange={value => setAttributes({ _settings_debug: value })}
+                    />
                 </PanelBody>
             </InspectorControls>
             <Card>
-                <CardHeader>
+                <CardHeader className={attributes.media.id != 0 ? 'with-preview' : ''}>
                     {
                         attributes.media.id != 0 &&
                         <div class="carousel-card__preview">
                             <img src={attributes.media.url} />
                         </div>
                     }
-                    <Heading level={4}>
-                        Title
-                    </Heading>
+                    <RichText
+                        tagName='h3'
+                        value={attributes.title}
+                        allowedFormats={['core/bold', 'core/italic']}
+                        onChange={value => setAttributes({ title: value })}
+                        placeholder={__('Card title', 'carousel-card')}
+                    />
                 </CardHeader>
                 <CardBody>
-                    <Text>body</Text>
+                    <RichText
+                        tagName='p'
+                        value={attributes.body}
+                        allowedFormats={['core/bold', 'core/italic']}
+                        onChange={value => setAttributes({ body: value })}
+                        placeholder={__('Card body', 'carousel-card')}
+                    />
                 </CardBody>
             </Card>
         </div>

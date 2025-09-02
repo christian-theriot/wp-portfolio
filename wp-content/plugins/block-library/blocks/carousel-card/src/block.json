@@ -15,6 +15,10 @@
         "block-library/carousel"
     ],
     "attributes": {
+        "_settings_debug": {
+            "type": "boolean",
+            "default": false
+        },
         "media": {
             "type": "object",
             "default": {
