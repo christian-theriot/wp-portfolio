@@ -16,6 +16,7 @@ jobs:
         run: |
           git config --global user.name "$(git log --format=%an -n 1 $HEAD)"
           git config --global user.email "$(git log --format=%an -n 1 $HEAD)"
+          git fetch origin staging
           git checkout staging
           git merge develop
           git push origin staging
