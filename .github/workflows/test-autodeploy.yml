@@ -14,8 +14,10 @@ jobs:
 
       - name: Merge develop into staging
         run: |
-          git config --global user.name "${{ git log --format=%an -n 1 $HEAD }}"
-          git config --global user.email "${{ git log --format=%ae -n 1 $HEAD }}"
+          USERNAME=$(git log --format=%an -n 1 $HEAD)
+          EMAIL=$(git log --format=%an -n 1 $HEAD)
+          git config --global user.name "$USERNAME"
+          git config --global user.email "$EMAIL"
           git checkout staging
           git merge develop
           git push origin staging
