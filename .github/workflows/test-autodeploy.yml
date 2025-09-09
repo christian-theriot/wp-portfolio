@@ -7,6 +7,8 @@ on:
 
 jobs:
   autodeploy:
+    permissions:
+        contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
