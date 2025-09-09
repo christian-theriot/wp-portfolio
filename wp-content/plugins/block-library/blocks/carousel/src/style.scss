@@ -3,7 +3,7 @@
         display: flex;
         width: 100%;
 
-        .dashicons {
+        .btn {
             padding-top: 10rem;
             padding-bottom: 10rem;
             cursor: pointer;
@@ -13,22 +13,20 @@
                 max-height: 0;
             }
 
-            &.dashicons-arrow-left-alt2 {
+            &.btn-prev {
                 position: absolute;
                 left: 1vw;
             }
 
-            &.dashicons-arrow-right-alt2 {
+            &.btn-next {
                 position: absolute;
                 right: 1vw;
             }
         }
 
-        &[data-num-cards="3"] {
+        & .slides[data-num-cards="3"] {
 
-            .wp-block-block-library-carousel-card.selected {
-                position: absolute;
-            }
+            .wp-block-block-library-carousel-card.selected {}
         }
 
         :not(:first-child) {
