@@ -19,5 +19,7 @@ jobs:
           git config user.name $(git log --format=%an -n 1 $HEAD)
           git config user.email $(git log --format=%ae -n 1 $HEAD)
           git config pull.rebase false
-          git checkout -b staging
+          git fetch origin staging
+          git checkout staging
+          git merge develop
           git push -u origin staging
