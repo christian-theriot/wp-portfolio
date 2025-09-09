@@ -14,8 +14,6 @@ jobs:
 
       - name: Merge develop into staging
         run: |
-          git clone https://christian-theriot:${{secrets.GITHUB_TOKEN}}@github.com/christian-theriot/wp-portfolio.git  -b develop tmp
-          cd tmp
           git config user.name $(git log --format=%an -n 1 $HEAD)
           git config user.email $(git log --format=%ae -n 1 $HEAD)
           git config pull.rebase false
