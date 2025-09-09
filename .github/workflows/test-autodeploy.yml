@@ -1,0 +1,21 @@
+name: Autodeploy
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  autodeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Merge develop into staging
+        run: |
+          git config --global user.name "${{ git log --format=%an -n 1 $HEAD }}"
+          git config --global user.email "${{ git log --format=%ae -n 1 $HEAD }}"
+          git checkout staging
+          git merge develop
+          git push origin staging
